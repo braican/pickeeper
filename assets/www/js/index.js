@@ -60,6 +60,7 @@ var app = {
     });
 
     var _DATA = {},
+        new_data,
         activeList;
 
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -80,23 +81,55 @@ var app = {
     }
 
     function gotFileEntry(fileEntry) {
+        fileEntry.file(gotFile, fail);
+        // fileEntry.createWriter(gotFileWriter, fail);
+    }
+
+    function gotFile(file){
+        readAsText(file);
+    }
+
+    function readAsText(file){
+        var reader = new FileReader();
+        reader.onloadend = function(evt){
+            
+            var json = JSON.parse(evt.target.result)
+            _DATA = json;
+
+            refreshLists(_DATA);
+
+            PIC.init();
+        }
+
+        reader.readAsText(file);
+    }
+
+    //
+    // write the file
+    //
+    function writeTheData() {
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFStoWrite, fail);
+    }
+
+    function gotFStoWrite(fileSystem) {
+        fileSystem.root.getDirectory("PicKeeper", {create: true, exclusive: false}, gotDirEntrytoWrite, fail);
+    }
+
+    function gotDirEntrytoWrite(parent){
+        var parentEntry = new DirectoryEntry(parent.name, parent.fullPath);
+        parentEntry.getFile("data.txt", {create: true, exclusive: false}, gotFileEntrytoWrite, fail);
+    }
+
+    function gotFileEntrytoWrite(fileEntry) {
         fileEntry.createWriter(gotFileWriter, fail);
     }
 
     function gotFileWriter(writer) {
         console.log("GOT FILE WRITER");
         writer.onwriteend = function(evt) {
-            console.log("WRITE NUMBER 1");
-            writer.truncate(18);
-            writer.onwriteend = function(evt) {
-                console.log("WRITE NUMBER 2");
-                writer.write(', "test2": {"test"}}');
-                writer.onwriteend = function(evt){
-                    console.log("FINISHED WRITING");
-                }
-            };
+            console.log("finished with write");
         };
-        writer.write('{"test1": {"test"}}');
+        writer.write(new_data);
     }
 
     function fail(error) {
@@ -180,6 +213,10 @@ var app = {
 
             _DATA[listName] = [];
 
+            new_data = _DATA;
+
+            writeTheData();
+
             refreshLists(_DATA);
 
             jQT.goBack('#lists');
@@ -201,6 +238,10 @@ var app = {
 
             _DATA[activeList].push(tmpObj);
 
+            new_data = _DATA;
+
+            writeTheData();
+
             refreshItems(_DATA[activeList]);
 
             jQT.goBack('#items');
@@ -209,24 +250,5 @@ var app = {
         });
 
     }
-
-    //
-    // DOM READY
-    //
-    $(document).ready(function() {
-        
-        $.get('data.txt', function(data) {
-            var json = JSON.parse(data);
-
-            _DATA = json;
-            console.log(json);
-
-            refreshLists(_DATA);
-
-            PIC.init();
-
-        }, 'json');
-
-    });
 
 })(window.PIC = window.PIC || {}, Zepto);
