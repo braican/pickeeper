@@ -29,7 +29,6 @@ body {
   height:100%;
   margin:0px;
   padding:0px;
-  text-transform:uppercase;
   width:100%;
 }
 
@@ -815,44 +814,36 @@ body {
   margin: 5px 10px 10px 10px;
   -webkit-margin-collapse: separate;
 }
-#jqt ul, #jqt ul.individual li {
-  background-color: #555658;
-  color: #d5d6d7;
-  text-shadow: #3c3d3e 0 -1px 0;
-  border: 1px solid #2f3031;
-  font: bold 18px "Helvetica Neue", Helvetica;
-}
 #jqt ul:first-child {
   margin-top: 15px;
 }
 #jqt ul li {
-  border-top: 1px solid #48494b;
   list-style-type: none;
   overflow: hidden;
-  padding: 10px;
   -webkit-transform: translate3d(0, 0, 0);
   /* expensive way to avoid flickr */
 }
 #jqt ul li a {
+  color: #404040;
+  font-size: 18px;
   text-decoration: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
   display: block;
-  padding: 10px;
-  margin: -10px;
+  padding: 14px 10px;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #fff;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-transform: translateZ(0);
-  color: white;
-  text-shadow: #3c3d3e 0 -1px 0;
+}
+#jqt ul li:last-child a {
+  border-bottom: 0;
+}
+#jqt ul li:first-child a {
+  border-top: 0;
 }
 #jqt ul li a.active {
   background-image: none;
-  background-color: #53b401;
-  -webkit-box-shadow: #5cc801 0 1px 0px inset;
-  box-shadow: #5cc801 0 1px 0px inset;
-  color: white;
-  text-shadow: #3c8101 0 -1px 0;
+  background-color: #e3e3e3;
 }
 #jqt ul li a.active small {
   color: #a0fe50;
@@ -890,19 +881,30 @@ body {
 }
 #jqt ul li ::-webkit-input-placeholder {
   color: #949698;
-  text-shadow: #3c3d3e 0 -1px 0;
 }
-#jqt ul li input[type="text"], #jqt ul li input[type="password"], #jqt ul li input[type="tel"], #jqt ul li input[type="number"], #jqt ul li input[type="search"], #jqt ul li input[type="email"], #jqt ul li input[type="url"], #jqt ul li textarea, #jqt ul li select {
-  color: white;
-  text-shadow: #3c3d3e 0 -1px 0;
+#jqt ul li input[type="text"],
+#jqt ul li input[type="password"],
+#jqt ul li input[type="tel"],
+#jqt ul li input[type="number"],
+#jqt ul li input[type="search"],
+#jqt ul li input[type="email"],
+#jqt ul li input[type="url"],
+#jqt ul li input[type="date"],
+#jqt ul li textarea,
+#jqt ul li select {
+  color: #404040;
   background: transparent url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
   border: 0;
   font-size:16px;
-  padding: 0;
-  display: inline-block;
+  padding: 20px;
+  display: block;
   margin-left: 0px;
   width: 100%;
   -webkit-appearance: textarea;
+  background: #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 #jqt ul li textarea {
   height: 120px;
@@ -930,20 +932,16 @@ body {
 }
 
 #jqt ul li input[type='submit'] {
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eeeeee), to(#9c9ea0));
-  border: 1px outset #aaa;
   display: block;
   font-size: inherit;
   font-weight: inherit;
   padding: 10px;
   background-image: none;
-  background-color: white;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(50%, #ffffff), color-stop(51%, #ffffff), color-stop(100%, #f2f2f2));
-  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f2f2f2);
-  background-image: linear-gradient(top, #ffffff, #ffffff 50%, #ffffff 51%, #f2f2f2);
-  border: 1px outset black;
+  float: right;
+  background-color: #404040;
+  color: #fff;
+  font-size: 22px;
+  border: 0;
 }
 #jqt ul li.arrow small, #jqt ul li.forward small {
   margin-right: 24px;
@@ -1141,18 +1139,6 @@ body {
   font-weight: bold;
 }
 
-#jqt ul li {
-  border-top: 1px solid #48494b;
-  background-image: none;
-  background-color: rgba(85, 86, 88, 0.2);
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(123, 124, 127, 0.2)), color-stop(3%, rgba(98, 99, 101, 0.2)), color-stop(100%, rgba(72, 73, 75, 0.2)));
-  background-image: -webkit-linear-gradient(top, rgba(123, 124, 127, 0.2), rgba(98, 99, 101, 0.2) 3%, rgba(72, 73, 75, 0.2));
-  background-image: linear-gradient(top, rgba(123, 124, 127, 0.2), rgba(98, 99, 101, 0.2) 3%, rgba(72, 73, 75, 0.2));
-}
-#jqt ul li a {
-  color: white;
-  text-shadow: #3c3d3e 0 -1px 0;
-}
 #jqt ul li .toggle input[type="checkbox"] {
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -1210,6 +1196,12 @@ body {
   display: block;
   width: 100%;
   height: auto;
+}
+
+a span.date{
+  float: right;
+  font-size: .8em;
+  color: #999;
 }
 
 

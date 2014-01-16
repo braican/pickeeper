@@ -251,4 +251,23 @@ var app = {
 
     }
 
+    //
+    // DOM READY
+    //
+    $(document).ready(function() {
+        
+        $.get('data.txt', function(data) {
+            var json = JSON.parse(data);
+
+            _DATA = json;
+            console.log(json);
+
+            refreshLists(_DATA);
+
+            PIC.init();
+
+        }, 'json');
+
+    });
+
 })(window.PIC = window.PIC || {}, Zepto);
