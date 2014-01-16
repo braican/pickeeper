@@ -175,7 +175,7 @@ var app = {
     PIC.init = function(){
 
         // ----------------------
-        // event listeners
+        // render content
 
         //
         // create the lists
@@ -204,12 +204,16 @@ var app = {
             $('#detail img').attr('src', itemPic);
         });
 
+        // -------------------------------
+        // add the things
+        //
         //
         // add new list
         //
-        $('#add-list').on('submit', function(event){
+        $('#add-list button').on('click', function(event){
             event.preventDefault();
-            var listName = $('input[name="list-name"]', this).val();
+            event.stopPropagation();
+            var listName = $('#add-list input[name="list-name"]').val();
 
             _DATA[listName] = [];
 
@@ -219,17 +223,18 @@ var app = {
 
             refreshLists(_DATA);
 
-            jQT.goBack('#lists');
+            jQT.goBack();
+
             $('input[type="text"]', this).val('');
         });
 
         //
         // add new item
         //
-        $('#add-item').on('submit', function(event){
+        $('#add-item button').on('click', function(event){
             event.preventDefault();
-            var itemName = $('input[name="item-name"]', this).val(),
-                itemDate = $('input[name="item-date"]', this).val(),
+            var itemName = $('#add-item input[name="item-name"]').val(),
+                itemDate = $('#add-item input[name="item-date"]').val(),
                 tmpObj = {};
 
             tmpObj["name"] = itemName;
@@ -244,7 +249,7 @@ var app = {
 
             refreshItems(_DATA[activeList]);
 
-            jQT.goBack('#items');
+            jQT.goBack();
             $('input[type="text"], input[type="date"]', this).val('');
 
         });
@@ -254,20 +259,20 @@ var app = {
     //
     // DOM READY
     //
-    $(document).ready(function() {
+    // $(document).ready(function() {
         
-        $.get('data.txt', function(data) {
-            var json = JSON.parse(data);
+    //     $.get('data.txt', function(data) {
+    //         var json = JSON.parse(data);
 
-            _DATA = json;
-            console.log(json);
+    //         _DATA = json;
+    //         console.log(json);
 
-            refreshLists(_DATA);
+    //         refreshLists(_DATA);
 
-            PIC.init();
+    //         PIC.init();
 
-        }, 'json');
+    //     }, 'json');
 
-    });
+    // });
 
 })(window.PIC = window.PIC || {}, Zepto);

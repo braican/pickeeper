@@ -598,14 +598,11 @@ body {
 
 #jqt .toolbar {
   background-color: #E4E4E4;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0 1px 6px;
   box-shadow: rgba(0, 0, 0, 0.4) 0 1px 6px;
   z-index: 10;
   position: relative;
-  padding: 10px;
-  height: 44px;
+  padding: 18px 12px;
 }
 #jqt .toolbar > h1 {
   text-align: left;
@@ -621,7 +618,8 @@ body {
 #jqt .toolbar > a{
   position: absolute;
   right: 18px;
-  top: 3px;
+  top: 50%;
+  margin-top: -18px;
   font-weight: 300;
   font-size: 30px;
   color: black;
@@ -931,7 +929,8 @@ body {
   text-shadow: #3c3d3e 0 -1px 0;
 }
 
-#jqt ul li input[type='submit'] {
+#jqt ul li input[type='submit'],
+button {
   display: block;
   font-size: inherit;
   font-weight: inherit;
